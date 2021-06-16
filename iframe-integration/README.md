@@ -23,4 +23,5 @@ You can also test the mock version
 <iframe src="https://widget.smartdyspnea.com/mock" allow="camera;microphone"></iframe>
 ```
 
-**Follow the [backend integration/API](../api/README.md) instructions in order to properly retrieve the `patient_token` using your server-side API. You should not call the API directly from your SPA application and it will expose your `client_credentials` to your end users.
+**Follow the [backend integration/API](../api/) instructions in order to properly retrieve the `patient_token` using your server-side API. You should not call the API directly from your SPA application and it will expose your `client_credentials` to your end users.
+

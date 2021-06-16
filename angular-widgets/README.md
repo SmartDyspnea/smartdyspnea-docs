@@ -21,14 +21,14 @@ yarn add @smart-dyspnea/angular-widgets
 
 ### Dependencies
 
-Install the following peer dependency:
+Install the following peer dependencies:
 
 ```
-npm install recordrtc
+npm install recordrtc jwt-decode
 ```
 
 ```
-yarn add recordrtc
+yarn add recordrtc jwt-decode
 ```
 
 ## Usage

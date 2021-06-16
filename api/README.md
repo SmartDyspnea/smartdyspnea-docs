@@ -118,14 +118,14 @@ curl \
 
 ```json
 {
-  "testId": "test-id-1234",
-  "patientId": "810299fa-1b4b-4b99-86c3-73ac9a3af96c",
-  "createdAt": "01-01-2021",
-  "test": {
-    "code": "C01",
-    "text": "100-95",
-    "confidence": 0.99
-  }
+    "testId": "78278a65-0f9e-4e6d-9df0-d75507fe4b2b",
+    "test": {
+        "code": "C01",
+        "text": "100-95",
+        "confidence": 0.99
+    },
+    "patientId": "810299fa-1b4b-4b99-86c3-73ac9a3af96c",
+    "createdAt": "2021-06-16 11:23:58"
 }
 ```
 
@@ -142,18 +142,18 @@ curl \
 
 ```json
 {
-  "patientId": "810299fa-1b4b-4b99-86c3-73ac9a3af96c",
-  "tests": [
-    {
-      "testId": "test-id-1234",
-      "patientId": "810299fa-1b4b-4b99-86c3-73ac9a3af96c",
-      "createdAt": "01-01-2021",
-      "test": {
-        "code": "C01",
-        "text": "100-95",
-        "confidence": 0.99
-      }
-    }
-  ]
+    "patientId": "810299fa-1b4b-4b99-86c3-73ac9a3af96c",
+    "tests": [
+        {
+            "testId": "78278a65-0f9e-4e6d-9df0-d75507fe4b2b",
+            "test": {
+                "code": "C01",
+                "text": "100-95",
+                "confidence": 0.99
+            },
+            "patientId": "810299fa-1b4b-4b99-86c3-73ac9a3af96c",
+            "createdAt": "2021-06-16 11:23:58"
+        }
+    ]
 }
 ```
