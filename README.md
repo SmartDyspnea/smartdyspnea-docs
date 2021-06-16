@@ -33,7 +33,9 @@ __Important:__ Never expose your `client_token` to end users
 
 ## API Docs
 
-The following document describes
+OpenAPI docs can be accessed at: docs.smartdyspnea.com
+
+We provide a [step-by-step guide with integration examples](./api/README.md)
 
 
 ## Frontend Widget
@@ -43,7 +45,7 @@ We provide different ways to add our widget to your frontend application. We rec
 - Framework widgets
   - [Angular widgets](./angular-widgets/README.md)
   - React widgets: Coming soon
-- [IFrame integration](./iframe-integration/)
+- [IFrame integration](./iframe-integration/README.md)
 
 
 ## Webhooks
