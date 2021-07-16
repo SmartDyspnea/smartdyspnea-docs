@@ -42,30 +42,28 @@ import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 
 import { AppComponent } from './app.component';
+import { HttpClientModule } from '@angular/common/http';
 import { SmartDyspneaAngularWidgetsModule } from '@smart-dyspnea/angular-widgets';
 
 @NgModule({
-  declarations: [
-    AppComponent
-  ],
-  imports: [
-    BrowserModule,
-    SmartDyspneaAngularWidgetsModule
-  ],
+  declarations: [AppComponent],
+  imports: [BrowserModule, HttpClientModule, SmartDyspneaAngularWidgetsModule],
   providers: [],
-  bootstrap: [AppComponent]
+  bootstrap: [AppComponent],
 })
-export class AppModule { }
+export class AppModule {}
 ```
 
-__NOTE:__ If using the __mock widget__ you should import `SmartDyspneaAngularWidgetsMockModule` instead.
+**NOTE:** If using the **mock widget** you should import `SmartDyspneaAngularWidgetsMockModule` instead.
 
 ### Calling the widget
 
-**Retrieve a `patient_token` for the signed-in user and pass it as an input to the component.
+\*\*Retrieve a `patient_token` for the signed-in user and pass it as an input to the component.
 
 ```html
-<smart-dyspnea-breathing-test [token]="{{ tokenValue }}"></smart-dyspnea-breathing-test>
+<smart-dyspnea-breathing-test
+  [token]="tokenValue"
+></smart-dyspnea-breathing-test>
 ```
 
 In case of integrating the mock component the token gets bypassed so you can pass an arbitrary string.
@@ -74,4 +72,4 @@ In case of integrating the mock component the token gets bypassed so you can pas
 <smart-dyspnea-breathing-test-mock></smart-dyspnea-breathing-test-mock>
 ```
 
-**Follow the [backend integration/API](../api/README.md) instructions in order to properly retrieve the `patient_token` using your server-side API. You should not call the API directly from your SPA application and it will expose your `client_credentials` to your end users.
+\*\*Follow the [backend integration/API](../api/README.md) instructions in order to properly retrieve the `patient_token` using your server-side API. You should not call the API directly from your SPA application and it will expose your `client_credentials` to your end users.
