@@ -38,6 +38,7 @@ import { NgModule } from '@angular/core';
 import { HttpClientModule } from '@angular/common/http';
 
 import { AppComponent } from './app.component';
+import { HttpClientModule } from '@angular/common/http';
 import { SmartDyspneaAngularWidgetsModule } from '@smart-dyspnea/angular-widgets';
 
 @NgModule({
@@ -50,9 +51,9 @@ import { SmartDyspneaAngularWidgetsModule } from '@smart-dyspnea/angular-widgets
     SmartDyspneaAngularWidgetsModule
   ],
   providers: [],
-  bootstrap: [AppComponent]
+  bootstrap: [AppComponent],
 })
-export class AppModule { }
+export class AppModule {}
 ```
 
 ### Inserting the widget
