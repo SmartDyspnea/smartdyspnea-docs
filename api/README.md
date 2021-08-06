@@ -59,7 +59,7 @@ This will return a new patient_id that you must store and assign to your own use
 {"patientId": "810299fa-1b4b-4b99-86c3-73ac9a3af96c", "createdAt": "2021-06-16 09:11:42"}
 ```
 
-### List patient
+### List patients
 
 You can access the list of registered patients
 
@@ -97,7 +97,39 @@ This will return a token that you can further pass to your frontend application 
 {"token": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJzdWIiOiI4MTAyOTlmYS0xYjRiLTRiOTktODZjMy03M2FjOWEzYWY5NmMiLCJleHAiOjE2MjM4Mzg2MTJ9.T7KOsz7ywDW0a87Qc24kjXdF9jHAI15VIH8cYmv6tHs"}
 ```
 
-## Frontend (patient) API
+### Checking patient tests
+
+You can check the tests created for a particular patient using the backoffice API.
+
+```bash
+curl \
+    -X GET \
+    -H "Authorization: Bearer <client_token>"  \
+    -H "Content-Type: application/json"  \
+    https://api.smartdyspnea.com/beta/patients/810299fa-1b4b-4b99-86c3-73ac9a3af96c/test
+```
+
+```json
+{
+    "patient_id": "810299fa-1b4b-4b99-86c3-73ac9a3af96c",
+    "tests": [
+        {
+            "updated_at": "2021-08-06T15:44:28.069940",
+            "created_at": "2021-08-06T15:44:22.978767",
+            "status": "success",
+            "test_result": {
+                "code": "C01",
+                "text": "100-95",
+                "confidence": 0.99
+            },
+            "patient_id": "810299fa-1b4b-4b99-86c3-73ac9a3af96c",
+            "test_id": "dfd076ac-2959-43dd-a019-9250f860b5af"
+        }
+    ]
+}
+```
+
+## Patient API (Frontend)
 
 This API can be used on behalf of users or integrated into your own frontend. If you are integrating one of our widgets into your application this is the API that will be used underneath.
 
@@ -113,25 +145,36 @@ curl \
     -H "Authorization: Bearer <patient_token>"  \
     -H "Content-Type: application/json"  \
     -d '{"audio": "<mp3_bytes>"}' \
-    https://api.smartdyspnea.com/beta/patients/810299fa-1b4b-4b99-86c3-73ac9a3af96c/tests
+    https://api.smartdyspnea.com/beta/patient/tests
 ```
 
 ```json
 {
-    "testId": "78278a65-0f9e-4e6d-9df0-d75507fe4b2b",
-    "test": {
+    "updated_at": "2021-08-06T15:44:28.069940",
+    "created_at": "2021-08-06T15:44:22.978767",
+    "status": "success",
+    "test_result": {
         "code": "C01",
         "text": "100-95",
         "confidence": 0.99
     },
-    "patientId": "810299fa-1b4b-4b99-86c3-73ac9a3af96c",
-    "createdAt": "2021-06-16 11:23:58"
+    "patient_id": "810299fa-1b4b-4b99-86c3-73ac9a3af96c",
+    "test_id": "dfd076ac-2959-43dd-a019-9250f860b5af"
 }
 ```
 
+## Asynchronous execution of tests
+
+Creating a new test will return an inmmediante response with the id of the new tests. 
+
+If you retrieve the lists of tests at that moment you will see that the value of `status` property will be `pending`.
+
+At that moment the test is being scheduled and triggered asynchronously. It should resolve in a few seconds, changing its `status` to `success` and adding the resulting values.
+
+A webhook will also be triggered if configured.
 ### Listing previous tests
 
-This endpoint retrieves the list of past tests
+This endpoint retrieves the list of past tests for the patient, can be used from the frontend to render the results if building a custom integration.
 
 ```bash
 curl \
@@ -145,14 +188,16 @@ curl \
     "patientId": "810299fa-1b4b-4b99-86c3-73ac9a3af96c",
     "tests": [
         {
-            "testId": "78278a65-0f9e-4e6d-9df0-d75507fe4b2b",
-            "test": {
+            "updated_at": "2021-08-06T15:44:28.069940",
+            "created_at": "2021-08-06T15:44:22.978767",
+            "status": "success",
+            "test_result": {
                 "code": "C01",
                 "text": "100-95",
                 "confidence": 0.99
             },
-            "patientId": "810299fa-1b4b-4b99-86c3-73ac9a3af96c",
-            "createdAt": "2021-06-16 11:23:58"
+            "patient_id": "810299fa-1b4b-4b99-86c3-73ac9a3af96c",
+            "test_id": "dfd076ac-2959-43dd-a019-9250f860b5af"
         }
     ]
 }

@@ -4,14 +4,13 @@
 
 This documents describes a comprehensive guide to integrate the [AI-Powered SmartDyspnea Oxygen Saturation Test](https://smartdyspnea.com) widget.
 
-![](./screenshot.png)
-
 ## Prerequisites
 
 If planning a production integration:
 
-- Contact sales team to acquire an API Key
+- Contact sales team to acquire an API Key, and setup your webhook endpoint.
 - A server-rendered or and SPA+API application
+- You can however test the web component/iframe by using a stub deployment.
 
 ## Architecture & DataFlow
 
@@ -25,6 +24,7 @@ Integrating the SmartDyspnea client requires both a backend and frontend integra
 - Backend can provide the customer facing frontend application with a `patient_token`
 - Frontend can integrate the SmartDyspnea widget using the `patient_token`
 - The customer (patient) can then perform tests and send data to SmartDyspnea services
+- Our system will notify each successful test using a webhook connection.
 
 __Important:__ Never expose your `client_token` to end users
 
@@ -50,4 +50,14 @@ We provide different ways to add our widget to your frontend application. We rec
 
 ## Webhooks
 
-> Coming soon
+The algorithms that power our tests run asynchronously. Our widgets are impllemented to listen to the internal status and render the results when available, however you can get notified via webhook when a test has finished.
+
+- [Webhook Docs](./webhook/)
+
+## Screenshots
+
+![](./screenshots/ss-instructions.png)
+![](./screenshots/ss-record.png)
+![](./screenshots/ss-recording.png)
+![](./screenshots/ss-result1.png)
+![](./screenshots/ss-result2.png)

@@ -2,14 +2,9 @@
 
 We provide a native angular implementation of our audio respiratory test that can be easily installed from npm and integrated into an existing angular application.
 
-## npm repositories
+## Installing from npm
 
-- [@smart-dyspnea/angular-widgets](https://www.npmjs.com/package/@smart-dyspnea/angular-widgets): Production-ready component, requires a valid `patient_token` to render and be activated.
-- [@smart-dyspnea/angular-widgets-mock](https://www.npmjs.com/package/@smart-dyspnea/angular-widgets-mock): Unit test component to check permissions, layout and styles, this does not connects to the API and thus does not requires a token. This widget records audio and can be used to test the device permissions, however it does return a random result.
-
-## Integration instructions
-
-Add the dependency to your `package.json` file using your preferred dependency tool>
+Add the following dependency to your `package.json` file using your preferred dependency tool>
 
 ```
 npm install @smart-dyspnea/angular-widgets
@@ -35,11 +30,12 @@ yarn add recordrtc jwt-decode
 
 ### Configuring your application
 
-Import the `AngularWidgetsModule` module into your angular application, like in the following minimal example:
+Import the `AngularWidgetsModule` module into your angular application, like in the following minimal example (make sure to include the `HttpClientModule` in your application):
 
 ```typescript
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
+import { HttpClientModule } from '@angular/common/http';
 
 import { AppComponent } from './app.component';
 import { SmartDyspneaAngularWidgetsModule } from '@smart-dyspnea/angular-widgets';
@@ -50,6 +46,7 @@ import { SmartDyspneaAngularWidgetsModule } from '@smart-dyspnea/angular-widgets
   ],
   imports: [
     BrowserModule,
+    HttpClientModule,
     SmartDyspneaAngularWidgetsModule
   ],
   providers: [],
@@ -58,20 +55,38 @@ import { SmartDyspneaAngularWidgetsModule } from '@smart-dyspnea/angular-widgets
 export class AppModule { }
 ```
 
-__NOTE:__ If using the __mock widget__ you should import `SmartDyspneaAngularWidgetsMockModule` instead.
+### Inserting the widget
 
-### Calling the widget
+The widget can receive a series of parameters in order to work or to customize its appearance.
 
+#### Authentication
 **Retrieve a `patient_token` for the signed-in user and pass it as an input to the component.
 
 ```html
-<smart-dyspnea-breathing-test [token]="{{ tokenValue }}"></smart-dyspnea-breathing-test>
-```
-
-In case of integrating the mock component the token gets bypassed so you can pass an arbitrary string.
-
-```html
-<smart-dyspnea-breathing-test-mock></smart-dyspnea-breathing-test-mock>
+<smartdyspnea-rothtest [token]="{{ tokenValue }}"></smartdyspnea-rothtest>
 ```
 
 **Follow the [backend integration/API](../api/README.md) instructions in order to properly retrieve the `patient_token` using your server-side API. You should not call the API directly from your SPA application and it will expose your `client_credentials` to your end users.
+
+If the token is missing or is invalid the widget will not render and will show an error message
+
+![](./ss-tokenerror.png)
+
+#### Mocking Authentication and services
+
+If you just wan to test dependencies, aestetics or UX of the component you can bypass authentication by using the mock parameter. However your widget will not call our services and will return random results for the tests.
+
+```html
+<smartdyspnea-rothtest [mock]="{{mock}}"></smartdyspnea-rothtest>
+```
+
+#### Theming the widget
+
+We offer several theming capabilities for the widget:
+
+- `color`: A hex value that will change the primary color of the application
+- `font`: A string value containing the name of one of the supported fonts
+  - `Roboto`
+  - `DM Sans`
+
+Is there something missing you want to change? Talk to us or leave an issue in this repo.
