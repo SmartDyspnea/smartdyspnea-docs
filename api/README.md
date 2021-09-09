@@ -152,12 +152,7 @@ curl \
 {
     "updated_at": "2021-08-06T15:44:28.069940",
     "created_at": "2021-08-06T15:44:22.978767",
-    "status": "success",
-    "test_result": {
-        "code": "C01",
-        "text": "100-95",
-        "confidence": 0.99
-    },
+    "status": "pending",
     "patient_id": "810299fa-1b4b-4b99-86c3-73ac9a3af96c",
     "test_id": "dfd076ac-2959-43dd-a019-9250f860b5af"
 }
@@ -165,7 +160,7 @@ curl \
 
 ## Asynchronous execution of tests
 
-Creating a new test will return an inmmediante response with the id of the new tests. 
+Creating a new test will return an immediante response with the id of the new tests. 
 
 If you retrieve the lists of tests at that moment you will see that the value of `status` property will be `pending`.
 
@@ -202,3 +197,46 @@ curl \
     ]
 }
 ```
+
+## Interpreting test result
+
+Our algorithm will return a prediction based on a particular interval for oxygen saturation, which should be interpreted __clinically__.
+
+### Test results
+
+- `code`: The identifier of the result, see below for a sample of a clinical interpretation.
+- `text`: The textual representation of oxygen saturation interval.
+- `confidence`: Statistical confidence of the result
+
+#### Sample clinical interpretation:
+
+Our algorithm is an approximation and should not be interpreted as a medical diagnostic. We strongly recommend adding a disclaimer text along with such interpretations:
+
+__Spanish__
+
+- __Dislaimer:__ Los resultados de esta prueba son aproximados y deben utilizarse
+            únicamente con fines preventivos, si nota cualquier tipo de síntoma
+            o cree que puede estar enfermo acuda a su médico lo antes posible.
+
+
+- `C00`
+    - __Resumen:__ El test ha fallado
+    - __Explicación:__ Lo sentimos, pero no hemos podido procesar la grabación. Inténtelo de nuevo procurando grabar en un entorno silencioso y contando lo más rápido que pueda pero tratando de pronunciar correctamente todos los números del 1 al 30.',
+> 
+
+- `C01`
+    - __Resumen:__ La saturación de oxígeno es la adecuada
+    - __Explicación:__ No obstante, si nota algún síntoma respiratorio repita la prueba o consulte a su médico.
+
+- `C02`
+    - __Resumen:__ La saturación de oxígeno es más baja de lo habitual
+    - __Explicación:__ Sería recomendable contactar con su médico para que pueda confirmarlo
+
+- `C03`
+    - __Resumen:__ La saturación de oxígeno es preocupantemente baja
+    - __Explicación:__ Contacte con su médico lo antes posible para descartar cualquier problema respiratorio
+
+
+__English__
+
+Coming soon...

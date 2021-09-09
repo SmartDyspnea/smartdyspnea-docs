@@ -21,6 +21,8 @@ The payload included in the webhook contains the test information along with the
 }
 ```
 
+For interpreting these results please refer to the [API Documentation](../api/README.md)
+
 ## Security
 
 Webhooks must be secured on the customer's end by verifying a signature token that is included in the header `SmartDyspnea-Signature`.
