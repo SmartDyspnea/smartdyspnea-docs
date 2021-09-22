@@ -4,7 +4,7 @@ When purchasing your license you can configure a webhook integration by proving 
 
 Our system will `post` a request whenever a new test is processed.
 
-The payload included in the webhook contains the test information along with the patient identification:
+The payload included in the webhook contains the test information along with the patient identification and an one-time secure url to download a __pdf report__:
 
 ```json
 {
@@ -17,7 +17,8 @@ The payload included in the webhook contains the test information along with the
         "confidence": 0.99
     },
     "patient_id": "810299fa-1b4b-4b99-86c3-73ac9a3af96c",
-    "test_id": "dfd076ac-2959-43dd-a019-9250f860b5af"
+    "test_id": "dfd076ac-2959-43dd-a019-9250f860b5af",
+    "report_url": "https://..."
 }
 ```
 
@@ -63,3 +64,7 @@ signature = base64.b64encode(
 
 assert hmac.compare_digest(webhook_signature.encode("utf-8"), signature)
 ```
+
+## Report customisation
+
+You can customise the colors and fonts of the reports, please talk to your account manager and provide them with a color hex code and your preferred google font specimen.
