@@ -75,6 +75,45 @@ If you just wan to test dependencies, aestetics or UX of the component you can b
 <smartdyspnea-rothtest [mock]="mock"></smartdyspnea-rothtest>
 ```
 
+### Accessing test results
+
+You can access test result by binding to the `testResult` output in the component. This output emits the information of the last test when successfully loading the RESULTS step.
+
+```html
+<smartdyspnea-rothtest (testResult)="processTest($event)"></smartdyspnea-rothtest>
+```
+
+And then processing the test as intended
+
+```typescript
+  processTest(test: RothTest): void {
+    // Do something with the test
+  }
+```
+
+The `RothTest` interface can be imported in your typescript file as following
+
+```typescript
+import { RothTest } from '@smart-dyspnea/angular-widgets/lib/widgets/rothtest/models/rothtest';
+```
+
+And contains the following information, please refer to the API documentation for a comprehensive interpretation of the parameters.
+
+```json
+{
+    "updated_at": "2021-08-06T15:44:28.069940",
+    "created_at": "2021-08-06T15:44:22.978767",
+    "status": "success",
+    "test_result": {
+        "code": "C01",
+        "text": "100-95",
+        "confidence": 0.99
+    },
+    "patient_id": "810299fa-1b4b-4b99-86c3-73ac9a3af96c",
+    "test_id": "dfd076ac-2959-43dd-a019-9250f860b5af"
+}
+```
+
 ### Controlling views and navigation
 
 The widget has three main screens:
